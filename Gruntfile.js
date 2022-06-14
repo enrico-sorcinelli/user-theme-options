@@ -157,6 +157,7 @@ module.exports = function( grunt ) {
 					'!README.md',
 					'!CONTRIBUTING.md',
 					'!CHANGELOG.md',
+					'!TODO.md',
 					'!nbproject/**',
 					'!**/*.LCK',
 					'!**/_notes/**',
