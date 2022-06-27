@@ -375,8 +375,8 @@ module.exports = function( grunt ) {
 	]);
 
 	grunt.registerTask( 'build', [
-		'default',
 		'check',
+		'default',
 		'readme',
 		'clean',
 		'copy',
