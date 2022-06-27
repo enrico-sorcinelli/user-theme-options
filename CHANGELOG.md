@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.1] - 2022-06-27
+### Changed
+ - Grunt `build` task order.
+
+### Fixed
+ - Multisite support in getting user meta from network admin screen.
+ - Default constructor arguments.
+ - PHP coding standards.
+
 ## [1.1.0] - 2022-05-18
 ### Added
  - Italian translations.
