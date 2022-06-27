@@ -4,7 +4,7 @@ Tags: Themes, Options
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 5.9.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 
 Allow users to use Appearance menu items.
