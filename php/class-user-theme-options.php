@@ -26,8 +26,8 @@ class User_Theme_Options {
 
 	/**
 	 * Handled roles.
-	 * 
-	 * @var array 
+	 *
+	 * @var array
 	 */
 	public $managed_roles = array();
 
@@ -40,14 +40,19 @@ class User_Theme_Options {
 
 	/**
 	 * User_Theme_Options constructor.
+	 *
+	 * @param array $args {
+	 *     Argument list.
+	 *     @type boolean $debug Debug mode.
+	 * }
 	 */
 	public function __construct( $args = array() ) {
 
 		$this->settings = wp_parse_args(
+			$args,
 			array(
 				'debug' => false,
-			),
-			$args
+			)
 		);
 
 		// Load plugin text domain.
@@ -55,7 +60,7 @@ class User_Theme_Options {
 
 		// Set handled roles.
 		if ( defined( 'USER_THEME_OPTIONS_MANAGED_ROLES' ) && is_array( USER_THEME_OPTIONS_MANAGED_ROLES ) ) {
-			$this->managed_roles = USER_THEME_OPTIONS_MANAGED_ROLES; 
+			$this->managed_roles = USER_THEME_OPTIONS_MANAGED_ROLES;
 		}
 
 		// Add setting on user profile.
@@ -91,7 +96,7 @@ class User_Theme_Options {
 	 * Add section in user profile page.
 	 *
 	 * @param \WP_User $user The WP_User object of the user being edited.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function extra_user_profile_fields( $user ) {
@@ -102,7 +107,9 @@ class User_Theme_Options {
 		}
 
 		$theme_options = wp_parse_args(
-			get_user_option( 'user_theme_options_edit_theme_options', $user->ID ),
+			is_network_admin() ?
+				get_user_meta( $user->ID, 'user_theme_options_edit_theme_options', true )
+				: get_user_option( 'user_theme_options_edit_theme_options', $user->ID ),
 			array(
 				'themes'    => 0,
 				'customize' => 0,
@@ -113,7 +120,7 @@ class User_Theme_Options {
 
 		$this->log( __METHOD__ . ':' . __LINE__, $theme_options, is_network_admin() );
 
-?>
+		?>
 <h3><?php esc_html_e( 'Theme Options', 'user-theme-options' ); ?></h3>
 <table class="form-table">
 	<tr>
@@ -164,12 +171,12 @@ class User_Theme_Options {
 			</p>
 		</td>
 	</tr>
-<?php
+		<?php
 		// Allow to do other things.
 		do_action( 'user_theme_options_profile_fields', $user, $theme_options );
-?>
+		?>
 </table>
-<?php
+		<?php
 	}
 
 	/**
@@ -198,26 +205,26 @@ class User_Theme_Options {
 
 		$_REQUEST['user_theme_options_edit_theme_options'] = wp_parse_args(
 			$_REQUEST['user_theme_options_edit_theme_options'],
-				array(
-					'themes'    => 0,
-					'customize' => 0,
-					'widgets'   => 0,
-					'nav-menus' => 0,
-				)
-			);
+			array(
+				'themes'    => 0,
+				'customize' => 0,
+				'widgets'   => 0,
+				'nav-menus' => 0,
+			)
+		);
 
 		$add_cap = false;
-		foreach( $_REQUEST['user_theme_options_edit_theme_options'] as $key => $val ) {
+		foreach ( $_REQUEST['user_theme_options_edit_theme_options'] as $key => $val ) {
 			if ( ! empty( $val ) ) {
 				$add_cap = true;
 			}
 		}
 
 		if ( true === $add_cap ) {
-			$this->log( __METHOD__ . ':' . __LINE__  . ' add cap' );
+			$this->log( __METHOD__ . ':' . __LINE__ . ' add cap' );
 			$editing_user->add_cap( 'edit_theme_options' );
 		} else {
-			$this->log( __METHOD__ . ':' . __LINE__  . ' remove cap' );
+			$this->log( __METHOD__ . ':' . __LINE__ . ' remove cap' );
 			$editing_user->remove_cap( 'edit_theme_options' );
 		}
 
@@ -248,7 +255,7 @@ class User_Theme_Options {
 		}
 
 		$this->log( __METHOD__ . ':' . __LINE__ );
-		
+
 		// Retrieve per-site option.
 		$theme_options = wp_parse_args(
 			get_user_option( 'user_theme_options_edit_theme_options', $user->ID ),
@@ -264,7 +271,7 @@ class User_Theme_Options {
 		if ( empty( $theme_options['nav-menus'] ) ) {
 			remove_submenu_page( 'themes.php', 'nav-menus.php' );
 		}
-		
+
 		// Hide the Themes page.
 		if ( empty( $theme_options['themes'] ) ) {
 			remove_submenu_page( 'themes.php', 'themes.php' );
@@ -300,12 +307,12 @@ class User_Theme_Options {
 	public function check_role( $user = null ) {
 
 		if ( empty( $user ) ) {
-			$user = wp_get_current_user(); 
-		} elseif ( ! $user instanceof \WP_User)  {
+			$user = wp_get_current_user();
+		} elseif ( ! $user instanceof \WP_User ) {
 			$user = get_user_by( 'id', $user );
 		}
 
-		if ( empty ( $user ) ) {
+		if ( empty( $user ) ) {
 			return false;
 		}
 
@@ -325,13 +332,13 @@ class User_Theme_Options {
 	}
 
 	/**
-	 * Debugging helper. 
+	 * Debugging helper.
 	 */
 	private function log() {
 		if ( false === $this->settings['debug'] ) {
 			return;
 		}
-		error_log( print_r( func_get_args(), true ) );		
+		error_log( print_r( func_get_args(), true ) );
 	}
 
 	/**
