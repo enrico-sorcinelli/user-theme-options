@@ -4,7 +4,7 @@ Tags: Themes, Options
 Requires at least: 4.4
 Requires PHP: 5.2.4
 Tested up to: 6.0
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 
 Allow users to use Appearance menu items.
@@ -48,7 +48,7 @@ Define to `false` to disable (you will have to init it manually).
 
 `USER_THEME_OPTIONS_MANAGED_ROLES`
 		
-Allow to define array of managed roles. Empty array means all roles.
+Allow to define array of managed roles. Empty array means all roles (except of `administrator` ).
 
 = Hooks =
 
