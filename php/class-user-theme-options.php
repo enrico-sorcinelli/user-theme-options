@@ -318,8 +318,11 @@ class User_Theme_Options {
 
 		$this->log( __METHOD__ . ':' . __LINE__, $user->roles, $this->managed_roles, array_intersect( $user->roles, $this->managed_roles ) );
 
-		// Empty managed roles means all roles.
+		// Empty managed roles means all roles (except od administrator)
 		if ( empty( $this->managed_roles ) ) {
+			if ( in_array( 'administrator', $user->roles ) ) {
+				return false;
+			}
 			return true;
 		}
 
