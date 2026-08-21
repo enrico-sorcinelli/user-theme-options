@@ -62,11 +62,11 @@ Action allowin to do other things after plugin menu fixes.
 
 = Does it work with Gutenberg? =
 
-Yes?
+Yes
 
 = Does it work with multisite installation? =
 
-Yes?
+Yes
 
 == Screenshots ==
 
