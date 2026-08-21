@@ -13,7 +13,7 @@ Allow users to use Appearance menu items.
 
 Allow users to use Appearance menu items.
 
-== Basic Features
+## Basic Features ##
 
 * User settings managements.
 * Multisite support.
