@@ -3,8 +3,8 @@ Contributors: Enrico Sorcinelli
 Tags: Themes, Options
 Requires at least: 4.4
 Requires PHP: 5.2.4
-Tested up to: 6.0
-Stable tag: 1.1.2
+Tested up to: 7.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 
 Allow users to use Appearance menu items.
@@ -30,7 +30,7 @@ This section describes how to install the plugin and get it working.
 Once the plugin is installed you can control settings in the following ways:
 
 * **Theme Options** section of user edit page in Dashboard admin.
-* **Theme Options** section of user edit page in Network Dashboard admin (Network setting will be overriden by site settings). 
+* **Theme Options** section of user edit page in Network Dashboard admin (Network setting will be overriden by site settings).
 
 == API ==
 
@@ -47,7 +47,7 @@ Turn on debug messages.
 Define to `false` to disable (you will have to init it manually).
 
 `USER_THEME_OPTIONS_MANAGED_ROLES`
-		
+
 Allow to define array of managed roles. Empty array means all roles (except of `administrator` ).
 
 = Hooks =
