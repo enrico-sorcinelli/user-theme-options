@@ -55,6 +55,26 @@ class User_Theme_Options {
 			)
 		);
 
+		// Default sumbnenu visibility values.
+		$this->settings['default_theme_options'] = array(
+			'themes'       => 0,
+			'customize'    => 0,
+			'widgets'      => 0,
+			'nav-menus'    => 0,
+			'font-library' => 0,
+			'patterns'     => 0,
+		);
+
+		// Slug submenu mapping.
+		$this->settings['theme_options_slug_map'] = array(
+			'themes'       => 'themes.php',
+			'customize'    => 'customize.php',
+			'widgets'      => 'widgets.php',
+			'nav-menus'    => 'nav-menus.php',
+			'font-library' => 'font-library.php',
+			'patterns'     => 'site-editor.php?p=/pattern',
+		);
+
 		// Load plugin text domain.
 		load_plugin_textdomain( 'user-theme-options', false, dirname( plugin_basename( __FILE__ ) ) . '/../languages/' );
 
@@ -110,12 +130,7 @@ class User_Theme_Options {
 			is_network_admin() ?
 				get_user_meta( $user->ID, 'user_theme_options_edit_theme_options', true )
 				: get_user_option( 'user_theme_options_edit_theme_options', $user->ID ),
-			array(
-				'themes'    => 0,
-				'customize' => 0,
-				'widgets'   => 0,
-				'nav-menus' => 0,
-			)
+			$this->settings['default_theme_options']
 		);
 
 		$this->log( __METHOD__ . ':' . __LINE__, $theme_options, is_network_admin() );
@@ -171,6 +186,30 @@ class User_Theme_Options {
 			</p>
 		</td>
 	</tr>
+	<tr>
+		<th><?php esc_html_e( 'Fonts', 'user-theme-options' ); ?></th>
+			<td>
+			<label>
+				<input name="user_theme_options_edit_theme_options[font-library]" type="checkbox" value="1" <?php checked( 1, user_can( $user, 'edit_theme_options' ) && $theme_options['font-library'] ); ?>">
+				<?php esc_html_e( 'Enable Fonts', 'user-theme-options' ); ?>
+			</label>
+			<p class="description">
+				<?php esc_html_e( 'This setting will allow user to edit fonts.', 'user-theme-options' ); ?>
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<th><?php esc_html_e( 'Patterns', 'user-theme-options' ); ?></th>
+		<td>
+			<label>
+				<input name="user_theme_options_edit_theme_options[patterns]" type="checkbox" value="1" <?php checked( 1, user_can( $user, 'edit_theme_options' ) && $theme_options['patterns'] ); ?>">
+				<?php esc_html_e( 'Enable Patterns', 'user-theme-options' ); ?>
+			</label>
+			<p class="description">
+				<?php esc_html_e( 'This setting will allow user to edit patterns.', 'user-theme-options' ); ?>
+			</p>
+		</td>
+	</tr>
 		<?php
 		// Allow to do other things.
 		do_action( 'user_theme_options_profile_fields', $user, $theme_options );
@@ -205,12 +244,7 @@ class User_Theme_Options {
 
 		$_REQUEST['user_theme_options_edit_theme_options'] = wp_parse_args(
 			$_REQUEST['user_theme_options_edit_theme_options'],
-			array(
-				'themes'    => 0,
-				'customize' => 0,
-				'widgets'   => 0,
-				'nav-menus' => 0,
-			)
+			$this->settings['default_theme_options']
 		);
 
 		$add_cap = false;
@@ -241,6 +275,8 @@ class User_Theme_Options {
 	 */
 	public function fix_edit_themes_menu() {
 
+		global $submenu;
+
 		// Does nothing for admin users or if user yet don't have edit_theme_options.
 		if ( current_user_can( 'administrator' ) || ! current_user_can( 'edit_theme_options' ) ) {
 			return;
@@ -259,38 +295,36 @@ class User_Theme_Options {
 		// Retrieve per-site option.
 		$theme_options = wp_parse_args(
 			get_user_option( 'user_theme_options_edit_theme_options', $user->ID ),
-			array(
-				'themes'    => 0,
-				'customize' => 0,
-				'widgets'   => 0,
-				'nav-menus' => 0,
-			)
+			$this->settings['default_theme_options']
 		);
 
-		// Hide the Menus Themes page.
-		if ( empty( $theme_options['nav-menus'] ) ) {
-			remove_submenu_page( 'themes.php', 'nav-menus.php' );
-		}
+		// Iterate over each Appareance submenu.
+		foreach ( $submenu['themes.php'] as $item_value ) {
 
-		// Hide the Themes page.
-		if ( empty( $theme_options['themes'] ) ) {
-			remove_submenu_page( 'themes.php', 'themes.php' );
-		}
+			// Check slug.
+			if ( empty( $item_value[2] ) ) {
+				continue;
+			}
 
-		// Hide the Widgets page.
-		if ( empty( $theme_options['widgets'] ) ) {
-			remove_submenu_page( 'themes.php', 'widgets.php' );
-		}
+			// Iterate over each config.
+			foreach ( $theme_options as $key => $value ) {
 
-		// Hide the Customize page.
-		if ( empty( $theme_options['customize'] ) ) {
-			remove_submenu_page( 'themes.php', 'customize.php' );
+				// Check for mapping.
+				if ( ! isset( $this->settings['theme_options_slug_map'][ $key ] ) ) {
+					continue;
+				}
 
-			// Remove Customize from the Appearance submenu.
-			global $submenu;
-			unset( $submenu['themes.php'][6] );
-			unset( $submenu['themes.php'][15] );
-			unset( $submenu['themes.php'][20] );
+				// Match slug.
+				if ( preg_match( '#^' . preg_quote( $this->settings['theme_options_slug_map'][ $key ], '#' ) . '(\?|$)#', $item_value[2] ) ) {
+
+					// Remove menu item using complete submenu slug.
+					if ( empty( $value ) ) {
+						remove_submenu_page( 'themes.php', $item_value[2] );
+					}
+
+					break;
+				}
+			}
 		}
 
 		// Allow to do other things.
