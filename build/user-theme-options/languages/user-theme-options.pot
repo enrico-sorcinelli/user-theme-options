@@ -1,0 +1,109 @@
+# Copyright (C) 2026 Enrico Sorcinelli
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: User Theme Options 1.2.0\n"
+"Report-Msgid-Bugs-To: "
+"https://github.com/enrico-sorcinelli/user-theme-options/issues\n"
+"POT-Creation-Date: 2026-08-21 08:47:59+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2026-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Enrico Sorcinelli\n"
+"Language-Team: Enrico Sorcinelli\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_"
+"x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;esc_html__;esc_html_e;esc_html_x;"
+"esc_attr__;esc_attr_e;esc_attr_x;\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+
+#: php/class-user-theme-options.php:139
+msgid "Theme Options"
+msgstr ""
+
+#: php/class-user-theme-options.php:142
+msgid "Themes"
+msgstr ""
+
+#: php/class-user-theme-options.php:146
+msgid "Enable Themes"
+msgstr ""
+
+#: php/class-user-theme-options.php:149
+msgid "This setting will allow user to edit themes."
+msgstr ""
+
+#: php/class-user-theme-options.php:154
+msgid "Customizer"
+msgstr ""
+
+#: php/class-user-theme-options.php:158
+msgid "Enable Customize"
+msgstr ""
+
+#: php/class-user-theme-options.php:161
+msgid "This setting will allow user to open customizer."
+msgstr ""
+
+#: php/class-user-theme-options.php:166
+msgid "Widgets"
+msgstr ""
+
+#: php/class-user-theme-options.php:170
+msgid "Enable widgets"
+msgstr ""
+
+#: php/class-user-theme-options.php:173
+msgid "This setting will allow user to edit widgets."
+msgstr ""
+
+#: php/class-user-theme-options.php:178
+msgid "Menu"
+msgstr ""
+
+#: php/class-user-theme-options.php:182
+msgid "Enable menus"
+msgstr ""
+
+#: php/class-user-theme-options.php:185
+msgid "This setting will allow user to edit menus."
+msgstr ""
+
+#: php/class-user-theme-options.php:190
+msgid "Fonts"
+msgstr ""
+
+#: php/class-user-theme-options.php:194
+msgid "Enable Fonts"
+msgstr ""
+
+#: php/class-user-theme-options.php:197
+msgid "This setting will allow user to edit fonts."
+msgstr ""
+
+#: php/class-user-theme-options.php:202
+msgid "Patterns"
+msgstr ""
+
+#: php/class-user-theme-options.php:206
+msgid "Enable Patterns"
+msgstr ""
+
+#: php/class-user-theme-options.php:209
+msgid "This setting will allow user to edit patterns."
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"A WordPress plugin that allow to grant access permissions to Appearance "
+"menu."
+msgstr ""
