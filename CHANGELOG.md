@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
  - "Fonts" and "Patterns" submenu grants.
  - _build/_ directory.
+ - Tested up to WordPress 7.1.
 
 ### Changed
  - Improved submenu grants management.
