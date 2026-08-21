@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.2.0] - 2026-08-21
 ### Added
- - "Fonts" and "Patterns" submenu grants. 
+ - "Fonts" and "Patterns" submenu grants.
+ - _build/_ directory.
 
 ### Changed
  - Improved submenu grants management.
