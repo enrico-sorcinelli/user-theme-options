@@ -39,7 +39,7 @@ dwsync.xml
 intermediate
 cache
 tmp
-build
+build/*.zip
 TODO.md
 
 /composer.lock
