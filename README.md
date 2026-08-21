@@ -1,5 +1,5 @@
 # User Theme Options #
-**Contributors:** Enrico Sorcinelli  
+**Contributors:** enrico.sorcinelli  
 **Tags:** Themes, Options  
 **Requires at least:** 4.4  
 **Requires PHP:** 5.2.4  
